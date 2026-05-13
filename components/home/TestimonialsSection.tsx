@@ -9,7 +9,7 @@ const testimonials = [
     name: "Chief Nursing Officer",
     org: "Regional hospital, North America",
     image:
-      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80",
   },
   {
     quote:
@@ -17,7 +17,7 @@ const testimonials = [
     name: "Head of Radiology",
     org: "Imaging center, United States",
     image:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80",
   },
   {
     quote:
@@ -25,7 +25,7 @@ const testimonials = [
     name: "Procurement Manager",
     org: "University health system",
     image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=200&q=80",
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80",
   },
 ];
 

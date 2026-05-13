@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
+import { FiImage, FiMinus, FiPlus, FiTrash2 } from "react-icons/fi";
 import Link from "next/link";
 import type { Product } from "@/types";
 import { formatCurrency } from "@/lib/utils";
 import { useCartStore } from "@/store/cartStore";
+import { useValidatedImages } from "@/hooks/useValidatedImages";
+import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 
 export function CartItem({ product }: { product: Product }) {
   const line = useCartStore((s) =>
@@ -13,6 +15,8 @@ export function CartItem({ product }: { product: Product }) {
   );
   const setQuantity = useCartStore((s) => s.setQuantity);
   const removeItem = useCartStore((s) => s.removeItem);
+  const { validUrls, ready } = useValidatedImages(product.images);
+  const thumb = validUrls[0];
 
   if (!line) return null;
 
@@ -22,13 +26,21 @@ export function CartItem({ product }: { product: Product }) {
         href={`/products/${product.slug}`}
         className="relative h-24 w-28 shrink-0 overflow-hidden rounded-xl bg-slate-100 sm:h-28 sm:w-32"
       >
-        <Image
-          src={product.images[0]}
-          alt={product.name}
-          fill
-          className="object-cover"
-          sizes="128px"
-        />
+        {!ready ? (
+          <LoadingSkeleton className="absolute inset-0 h-full w-full rounded-xl" />
+        ) : thumb ? (
+          <Image
+            src={thumb}
+            alt={product.name}
+            fill
+            className="object-cover"
+            sizes="128px"
+          />
+        ) : (
+          <div className="absolute inset-0 flex items-center justify-center bg-slate-200 text-slate-400">
+            <FiImage className="h-8 w-8" aria-hidden />
+          </div>
+        )}
       </Link>
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="flex flex-wrap items-start justify-between gap-2">
