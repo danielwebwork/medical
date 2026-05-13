@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, Suspense } from "react";
+import { useMemo, useState, Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiSearch } from "react-icons/fi";
@@ -11,14 +11,15 @@ import { ProductGridSkeleton } from "@/components/ui/LoadingSkeleton";
 import { products, categories } from "@/data/products";
 import type { ProductCategory } from "@/types";
 
-const PAGE_SIZE = 3;
+const INITIAL_VISIBLE = 20;
+const LOAD_MORE_STEP = 3;
 
 function ProductsExplorerInner() {
   const searchParams = useSearchParams();
   const initialQ = searchParams.get("q") ?? "";
   const [query, setQuery] = useState(initialQ);
   const [category, setCategory] = useState<ProductCategory | "All">("All");
-  const [visible, setVisible] = useState(PAGE_SIZE);
+  const [visible, setVisible] = useState(INITIAL_VISIBLE);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -32,6 +33,10 @@ function ProductsExplorerInner() {
       return matchCat && matchQ;
     });
   }, [query, category]);
+
+  useEffect(() => {
+    setVisible(Math.min(INITIAL_VISIBLE, filtered.length));
+  }, [query, category, filtered.length]);
 
   const slice = filtered.slice(0, visible);
   const hasMore = visible < filtered.length;
@@ -52,7 +57,6 @@ function ProductsExplorerInner() {
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value);
-                setVisible(PAGE_SIZE);
               }}
               placeholder="Search equipment..."
               className="w-full rounded-xl border border-slate-200 bg-white py-2.5 pl-10 pr-4 text-sm text-slate-900 outline-none transition focus:border-medical-400 focus:ring-2 focus:ring-medical-100"
@@ -66,7 +70,6 @@ function ProductsExplorerInner() {
           type="button"
           onClick={() => {
             setCategory("All");
-            setVisible(PAGE_SIZE);
           }}
           className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
             category === "All"
@@ -82,7 +85,6 @@ function ProductsExplorerInner() {
             type="button"
             onClick={() => {
               setCategory(c);
-              setVisible(PAGE_SIZE);
             }}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
               category === c
@@ -130,14 +132,19 @@ function ProductsExplorerInner() {
       </AnimatePresence>
 
       {hasMore ? (
-        <div className="mt-10 flex justify-center">
+        <div className="mt-10 flex flex-col items-center gap-2">
+          <p className="text-sm text-slate-500">
+            Showing {slice.length} of {filtered.length} products
+          </p>
           <Button
             type="button"
             variant="outline"
             size="lg"
-            onClick={() => setVisible((v) => v + PAGE_SIZE)}
+            onClick={() =>
+              setVisible((v) => Math.min(v + LOAD_MORE_STEP, filtered.length))
+            }
           >
-            Load more
+            Load 3 more
           </Button>
         </div>
       ) : null}
@@ -147,7 +154,7 @@ function ProductsExplorerInner() {
 
 export function ProductsExplorer() {
   return (
-    <Suspense fallback={<ProductGridSkeleton count={6} />}>
+    <Suspense fallback={<ProductGridSkeleton count={12} />}>
       <ProductsExplorerInner />
     </Suspense>
   );
