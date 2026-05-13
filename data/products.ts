@@ -1,12 +1,11 @@
 import type { Product, ProductCategory } from "@/types";
 
-const u = (photoId: string) =>
-  `https://images.unsplash.com/${photoId}?auto=format&fit=crop&w=1200&q=80`;
+/** Stable imagery via Picsum seeds (deterministic; avoids removed Unsplash photo 404s). */
+const pic = (seed: string) =>
+  `https://picsum.photos/seed/${encodeURIComponent(seed)}/1200/900`;
 
-export const products: Product[] = [
-
+const coreProducts: Product[] = [
   {
-    
     id: "p-ecg-01",
     slug: "ecg-machine-12-channel",
     name: "12-Channel Digital ECG Machine",
@@ -16,11 +15,7 @@ export const products: Product[] = [
       "Our 12-channel digital ECG system delivers crisp waveforms, built-in arrhythmia detection, and optional Wi-Fi export for hospital information systems. Ideal for cardiology clinics, general practice, and mobile screening programs.",
     price: 4899,
     category: "Diagnostic",
-    images: [
-      u("photo-1559757172-57b1bb25b11a"),
-      u("photo-1579684385127-1ef15d5081ec"),
-      u("photo-1582719478250-c89cae4dc85b"),
-    ],
+    images: [pic("cun-ecg-a"), pic("cun-ecg-b"), pic("cun-ecg-c")],
     specifications: {
       Channels: "12-lead simultaneous acquisition",
       Display: "10.1\" color touchscreen",
@@ -41,11 +36,7 @@ export const products: Product[] = [
       "Compact cart-based ultrasound with phased array and convex probes, harmonic imaging, and Doppler modes. Designed for busy departments that need dependable imaging without a full fixed-room installation.",
     price: 42500,
     category: "Imaging",
-    images: [
-      u("photo-1516549655169-df83a0774514"),
-      u("photo-1582719471384-894fbb16e074"),
-      u("photo-1579684385127-1ef15d5081ec"),
-    ],
+    images: [pic("cun-us-a"), pic("cun-us-b"), pic("cun-us-c")],
     specifications: {
       Probes: "Convex + linear (optional cardiac)",
       Modes: "B, M, Color/PW/CW Doppler",
@@ -65,11 +56,7 @@ export const products: Product[] = [
       "A dependable multiparameter monitor for wards, recovery, and intermediate care. Large numerics, configurable alarms, and optional EtCO₂ module for expanded capability.",
     price: 3450,
     category: "Patient Monitoring",
-    images: [
-      u("photo-1551190822-a9333d879b1f"),
-      u("photo-1584982751601-97dcc096659c"),
-      u("photo-1576091160550-2173dba999ef"),
-    ],
+    images: [pic("cun-pm-a"), pic("cun-pm-b"), pic("cun-pm-c")],
     specifications: {
       Parameters: "ECG, SpO₂, NIBP, RESP, TEMP",
       Display: "15\" anti-glare touchscreen",
@@ -89,11 +76,7 @@ export const products: Product[] = [
       "Public-access and clinical-ready biphasic defibrillator with impedance compensation, CPR metronome, and event recording. Rugged housing suitable for ambulances, airports, and hospital corridors.",
     price: 1799,
     category: "Emergency",
-    images: [
-      u("photo-1582719471384-894fbb16e074"),
-      u("photo-1579684385127-1ef15d5081ec"),
-      u("photo-1559757172-57b1bb25b11a"),
-    ],
+    images: [pic("cun-defib-a"), pic("cun-defib-b"), pic("cun-defib-c")],
     specifications: {
       Waveform: "Biphasic truncated exponential",
       Energy: "150–360 J (adult), pediatric attenuation",
@@ -113,11 +96,7 @@ export const products: Product[] = [
       "Complete digital radiography room package including generator, tube stand, table, and wireless FPD. Optimized dose protocols and PACS-ready DICOM workflow for modern imaging departments.",
     price: 185000,
     category: "Imaging",
-    images: [
-      u("photo-1519494026892-80bbd2d6fd0d"),
-      u("photo-1582719478250-c89cae4dc85b"),
-      u("photo-1576091160399-112ba8d25d1d"),
-    ],
+    images: [pic("cun-xray-a"), pic("cun-xray-b"), pic("cun-xray-c")],
     specifications: {
       Generator: "80 kW high-frequency",
       Detector: "17×17\" CsI wireless FPD",
@@ -137,11 +116,7 @@ export const products: Product[] = [
       "Robust 10 L/min oxygen concentrator with purity alarm, low-noise compressor, and easy filter access. Suitable for extended operation in clinics, nursing facilities, and home oxygen programs.",
     price: 1249,
     category: "Respiratory",
-    images: [
-      u("photo-1584982751601-97dcc096659c"),
-      u("photo-1551190822-a9333d879b1f"),
-      u("photo-1576091160550-2173dba999ef"),
-    ],
+    images: [pic("cun-o2-a"), pic("cun-o2-b"), pic("cun-o2-c")],
     specifications: {
       Flow: "1–10 L/min continuous",
       Purity: "93% ±3% at 5 L/min",
@@ -152,6 +127,325 @@ export const products: Product[] = [
     featured: true,
   },
 ];
+
+type Template = {
+  slugBase: string;
+  name: string;
+  short: string;
+  long: string;
+  price: number;
+  category: ProductCategory;
+  featured?: boolean;
+  specs: Record<string, string>;
+};
+
+const extensionTemplates: Template[] = [
+  {
+    slugBase: "portable-spirometer",
+    name: "Portable Diagnostic Spirometer",
+    short: "Lung function testing with PC software and calibration syringe.",
+    long: "Handheld spirometer suitable for occupational health, asthma clinics, and pre-operative screening with ATS/ERS traceability.",
+    price: 2499,
+    category: "Diagnostic",
+    specs: { Sensor: "Digital turbine", Software: "Windows reporting", Standards: "ATS/ERS" },
+  },
+  {
+    slugBase: "holter-recorder",
+    name: "Digital Holter Recorder (3-channel)",
+    short: "Lightweight recorder with event button and patient diary app.",
+    long: "Three-channel Holter with high-resolution sampling, noise rejection, and cloud upload option for reading centers.",
+    price: 3199,
+    category: "Diagnostic",
+    specs: { Channels: "3", Recording: "24–168 h", Storage: "SD + USB export" },
+  },
+  {
+    slugBase: "vein-finder",
+    name: "Near-Infrared Vein Visualization Device",
+    short: "Hands-free cart or tabletop vein illumination for venipuncture.",
+    long: "Improves first-stick success in pediatrics and bariatric care with adjustable projection color and brightness.",
+    price: 4299,
+    category: "Diagnostic",
+    specs: { Wavelength: "850 nm class", Mount: "Cart / pole", Power: "Internal battery" },
+  },
+  {
+    slugBase: "colposcope-digital",
+    name: "Digital Video Colposcope",
+    short: "HD optics with on-screen measurement and image capture.",
+    long: "Integrated LED illumination, green filter, and documentation software for outpatient gynecology.",
+    price: 8900,
+    category: "Imaging",
+    specs: { Optics: "5–40× zoom", Camera: "4K CMOS", Illumination: "LED ring" },
+  },
+  {
+    slugBase: "fetal-monitor",
+    name: "Antepartum Fetal Monitor",
+    short: "NST with twins support, tocodynamometry, and central station ready.",
+    long: "Bedside fetal heart rate monitoring for L&D and antepartum units with trace interpretation tools.",
+    price: 6200,
+    category: "Patient Monitoring",
+    specs: { Ultrasound: "1.0 MHz waterproof", TOCO: "External", Display: "12\" touch" },
+  },
+  {
+    slugBase: "infusion-pump",
+    name: "Volumetric Infusion Pump",
+    short: "Drug library, air-in-line detection, and bolus mode.",
+    long: "General-purpose IV pump for med-surg floors with Wi-Fi dose error reduction integration.",
+    price: 1899,
+    category: "Patient Monitoring",
+    specs: { Flow: "0.1–1200 mL/h", Battery: "8 h typical", Connectivity: "Optional Wi-Fi" },
+  },
+  {
+    slugBase: "syringe-pump",
+    name: "Syringe Infusion Pump",
+    short: "Stackable design with occlusion pressure monitoring.",
+    long: "High-accuracy syringe driver for ICU, NICU, and anesthesia with guardrails and lockable keypad.",
+    price: 1599,
+    category: "Patient Monitoring",
+    specs: { Syringes: "5–60 mL", Rate: "0.1–1800 mL/h", Mount: "Pole clamp" },
+  },
+  {
+    slugBase: "anesthesia-workstation",
+    name: "Anesthesia Delivery Workstation",
+    short: "Low-flow anesthesia with integrated ventilator and gas monitoring.",
+    long: "Ceiling or mobile configuration with vaporizers, AGSS interface, and optional EtAA.",
+    price: 98500,
+    category: "Respiratory",
+    specs: { Vaporizers: "2× Selectatec", Ventilator: "Integrated ICU modes", Monitors: "FiO₂, EtCO₂" },
+  },
+  {
+    slugBase: "surgical-led-light",
+    name: "LED Surgical Shadowless Light",
+    short: "Single dome with adjustable color temperature and depth of field.",
+    long: "Cool-light LED head for general surgery suites with suspension arm options.",
+    price: 12400,
+    category: "Emergency",
+    specs: { Illuminance: "160,000 lx @ 1 m", CCT: "3500–5000 K", Sterilizable: "Handle" },
+  },
+  {
+    slugBase: "operating-table",
+    name: "Electro-Hydraulic Operating Table",
+    short: "Carbon fiber extension, kidney bridge, and battery backup.",
+    long: "General surgery table with radiolucent top segments and intuitive hand control.",
+    price: 28500,
+    category: "Emergency",
+    specs: { Capacity: "360 kg", Movements: "8 motorized", Imaging: "C-arm compatible" },
+  },
+  {
+    slugBase: "patient-stretcher",
+    name: "Hydraulic Patient Stretcher",
+    short: "Side rails, fifth wheel steering, and oxygen bottle holder.",
+    long: "Emergency department stretcher with Trendelenburg and IV pole integration.",
+    price: 4200,
+    category: "Patient Monitoring",
+    specs: { Mattress: "76 mm foam", Rails: "Aluminum collapsible", Brakes: "Central locking" },
+  },
+  {
+    slugBase: "pulse-oximeter-handheld",
+    name: "Handheld Pulse Oximeter",
+    short: "Spot-check SpO₂ and pulse for triage and transport.",
+    long: "Rugged handheld with plethysmograph, alarms, and long battery life for outreach programs.",
+    price: 289,
+    category: "Diagnostic",
+    specs: { "SpO2 range": "70–100%", Pulse: "25–250 bpm", Power: "AA alkaline" },
+  },
+  {
+    slugBase: "autoclave-tabletop",
+    name: "Tabletop Steam Sterilizer (Class B)",
+    short: "18 L chamber with USB cycle logging and drying phase.",
+    long: "Compact autoclave for dental and minor surgery instrument reprocessing with validated cycles.",
+    price: 5600,
+    category: "Respiratory",
+    specs: { Chamber: "18 L", Cycles: "134 °C vacuum", Standards: "EN 13060" },
+  },
+  {
+    slugBase: "suction-unit",
+    name: "Electric Surgical Suction Pump",
+    short: "High flow for OR and ward with bacterial filters.",
+    long: "Oil-free piston pump with collection jars and overflow protection.",
+    price: 2100,
+    category: "Respiratory",
+    specs: { Flow: "40 L/min", Vacuum: "-85 kPa", Jars: "2× 2 L" },
+  },
+  {
+    slugBase: "electrosurgical-unit",
+    name: "Electrosurgical Generator (400 W)",
+    short: "Monopolar and bipolar modes with vessel sealing option.",
+    long: "RF generator for open and laparoscopic procedures with footswitch and recall presets.",
+    price: 8900,
+    category: "Emergency",
+    specs: { Power: "400 W", Modes: "Cut, coag, blend", Footswitch: "Included" },
+  },
+  {
+    slugBase: "lcd-vision-chart",
+    name: "Digital LCD Vision Chart",
+    short: "Snellen, ETDRS, and pediatric optotypes with remote control.",
+    long: "Wall-mounted refraction lane chart with calibrated luminance and mirror projection kit.",
+    price: 3200,
+    category: "Diagnostic",
+    specs: { Screen: "23\" LED", Distance: "2.5–6 m", Standards: "ISO 8596" },
+  },
+  {
+    slugBase: "audiometer-booth",
+    name: "Clinical Diagnostic Audiometer",
+    short: "AC/BC testing with insert earphones and bone oscillator.",
+    long: "Two-channel audiometer for booth-based threshold testing with PC interface.",
+    price: 4500,
+    category: "Diagnostic",
+    specs: { Frequencies: "125–8000 Hz", Masking: "Narrowband", Output: "USB / print" },
+  },
+  {
+    slugBase: "video-laryngoscope",
+    name: "Reusable Video Laryngoscope System",
+    short: "Anti-fog blade set with 3.5\" display and recording.",
+    long: "Difficult airway management kit with Macintosh and D-blade sizes for adult and pediatric.",
+    price: 6800,
+    category: "Emergency",
+    specs: { Display: "3.5\" LCD", Blades: "5 sizes", Storage: "SD card" },
+  },
+  {
+    slugBase: "flexible-bronchoscope",
+    name: "Portable Flexible Bronchoscope",
+    short: "USB-powered imaging for bedside and ICU bronchoscopy.",
+    long: "Single-use sheath compatible scope with irrigation and biopsy channel.",
+    price: 9200,
+    category: "Imaging",
+    specs: { Diameter: "5.2 mm", Working: "120 cm", Channel: "2.0 mm" },
+  },
+  {
+    slugBase: "coagulation-analyzer",
+    name: "Semi-Auto Coagulation Analyzer",
+    short: "PT/APTT with incubation block and built-in printer.",
+    long: "Compact coagulation benchtop for satellite labs and anticoagulation clinics.",
+    price: 7800,
+    category: "Diagnostic",
+    specs: { Tests: "PT, APTT, FIB", Throughput: "60 samples/h", Printer: "Thermal" },
+  },
+  {
+    slugBase: "hematology-3part",
+    name: "3-Part Hematology Analyzer",
+    short: "CBC with histograms and QC management software.",
+    long: "Closed tube sampling with reagent pack tracking for small to mid-volume labs.",
+    price: 12500,
+    category: "Diagnostic",
+    specs: { Parameters: "21 + 3 histograms", Sample: "Whole blood 20 µL", Throughput: "60/h" },
+  },
+  {
+    slugBase: "centrifuge-clinical",
+    name: "Clinical Benchtop Centrifuge",
+    short: "Fixed-angle rotor for blood tubes up to 15 mL.",
+    long: "PRP and routine separation with programmable cycles and lid safety interlock.",
+    price: 1899,
+    category: "Diagnostic",
+    specs: { Speed: "4500 rpm", Capacity: "8× 15 mL", Timer: "0–99 min" },
+  },
+  {
+    slugBase: "incubator-infant",
+    name: "Infant Incubator with Servo Control",
+    short: "Air and skin temperature servo, humidity, and oxygen blend.",
+    long: "NICU incubator with elevating bed, X-ray tray, and alarm relay outputs.",
+    price: 18500,
+    category: "Patient Monitoring",
+    specs: { Temp: "32–37.5 °C", Humidity: "Up to 95%", "O2 blend": "21–65%" },
+  },
+  {
+    slugBase: "phototherapy-led",
+    name: "LED Phototherapy System",
+    short: "High-intensity bilirubin phototherapy with hour meter.",
+    long: "Overhead unit for NICU with height-adjustable stand and eye shields pack.",
+    price: 4200,
+    category: "Patient Monitoring",
+    specs: { Irradiance: "≥ 60 µW/cm²/nm", Peak: "460 nm", Timer: "999 h log" },
+  },
+  {
+    slugBase: "cpap-hospital",
+    name: "Hospital CPAP / BiPAP Ventilator",
+    short: "Non-invasive ventilation with leak compensation and SpO₂ option.",
+    long: "Adult NIV device for step-down units with integrated humidifier and trolley.",
+    price: 5600,
+    category: "Respiratory",
+    specs: { Modes: "CPAP, S, ST", Range: "4–30 cmH₂O", Alarm: "Low minute ventilation" },
+  },
+  {
+    slugBase: "high-flow-nasal",
+    name: "High-Flow Nasal Cannula Oxygen Therapy Unit",
+    short: "Heated humidification up to 60 L/min with integrated blender.",
+    long: "HFNC system for adult and pediatric interfaces with weaning protocols.",
+    price: 8900,
+    category: "Respiratory",
+    specs: { Flow: "2–60 L/min", "FiO2": "21–100%", Temp: "31–37 °C" },
+  },
+  {
+    slugBase: "dental-chair-package",
+    name: "Dental Treatment Unit Package",
+    short: "Chair, delivery system, scaler, and operating light bundle.",
+    long: "Complete operatory package with ceramic cuspidor and assistant instrumentation.",
+    price: 14500,
+    category: "Emergency",
+    specs: { Chair: "Syncro articulating", Instruments: "4 hoses", Light: "LED" },
+  },
+  {
+    slugBase: "slit-lamp-digital",
+    name: "Digital Slit Lamp Microscope",
+    short: "Five-magnification turret with imaging adapter.",
+    long: "Ophthalmology slit lamp with optional dry eye tear film imaging module.",
+    price: 11200,
+    category: "Imaging",
+    specs: { Magnification: "6×–40×", Illumination: "LED", Camera: "Optional 12 MP" },
+  },
+  {
+    slugBase: "laser-physio",
+    name: "Low-Level Laser Therapy Unit",
+    short: "Class 3B probe for pain management and tissue repair protocols.",
+    long: "Portable LLLT with preset programs and safety eyewear for physiotherapy clinics.",
+    price: 3600,
+    category: "Diagnostic",
+    specs: { Wavelength: "808 nm", Power: "500 mW", Programs: "30 built-in" },
+  },
+  {
+    slugBase: "tourniquet-system",
+    name: "Pneumatic Surgical Tourniquet System",
+    short: "Dual channel with limb occlusion pressure estimation.",
+    long: "OR tourniquet with battery backup and audible leak alarm.",
+    price: 2800,
+    category: "Emergency",
+    specs: { Channels: "2", Pressure: "50–600 mmHg", Timer: "0–240 min" },
+  },
+  {
+    slugBase: "mri-compatible-monitor",
+    name: "MRI-Conditional Patient Monitor",
+    short: "Fiber-linked display for MR suite vital signs.",
+    long: "Non-ferrous sensors and long fiber trunk for 1.5 T and 3 T environments.",
+    price: 42000,
+    category: "Patient Monitoring",
+    specs: { Parameters: "NIBP, SpO₂, ECG", Cable: "40 m fiber", Conditional: "3 T" },
+  },
+];
+
+function buildExtensionProducts(): Product[] {
+  return extensionTemplates.map((t, i) => {
+    const seq = i + 7;
+    const id = `p-ext-${String(seq).padStart(3, "0")}`;
+    const slug = `${t.slugBase}-cun${seq}`;
+    return {
+      id,
+      slug,
+      name: t.name,
+      shortDescription: t.short,
+      description: t.long,
+      price: t.price,
+      category: t.category,
+      images: [
+        pic(`cun-ext-${seq}-a`),
+        pic(`cun-ext-${seq}-b`),
+        pic(`cun-ext-${seq}-c`),
+      ],
+      specifications: { ...t.specs, "Warranty": "12 months parts (typical)" },
+      featured: t.featured ?? false,
+    };
+  });
+}
+
+export const products: Product[] = [...coreProducts, ...buildExtensionProducts()];
 
 export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);

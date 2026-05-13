@@ -18,7 +18,7 @@ export function ContactPageContent() {
       return;
     }
     toast.success("Message sent", {
-      description: "This is a demo form — connect it to your CRM or email API.",
+      description: "We have received your message and will get back to you as soon as possible.",
     });
     setName("");
     setEmail("");
@@ -131,13 +131,29 @@ export function ContactPageContent() {
         </div>
 
         <div className="overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-inner">
-          <div className="flex aspect-[16/9] flex-col items-center justify-center bg-gradient-to-br from-medical-100 to-medical-50 p-8 text-center">
-            <FiMapPin className="h-10 w-10 text-medical-600" />
-            <p className="mt-3 text-sm font-semibold text-slate-800">Map placeholder</p>
-            <p className="mt-1 max-w-xs text-xs text-slate-600">
-              Embed Google Maps for your USA and/or China locations here.
-            </p>
+          <p className="border-b border-slate-200 bg-white px-4 py-2 text-center text-xs font-semibold uppercase tracking-wide text-medical-800">
+            {siteConfig.offices.usa.label} — map
+          </p>
+          <div className="relative aspect-[16/9] min-h-[260px] w-full bg-slate-200">
+            <iframe
+              title={`Map: ${siteConfig.offices.usa.address}`}
+              src={`https://maps.google.com/maps?q=${encodeURIComponent(siteConfig.offices.usa.address)}&hl=en&z=15&ie=UTF8&iwloc=near&output=embed`}
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
           </div>
+          <p className="border-t border-slate-200 bg-white px-4 py-2 text-center text-xs text-slate-500">
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(siteConfig.offices.usa.address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-medical-700 underline-offset-2 hover:underline"
+            >
+              Open in Google Maps
+            </a>
+          </p>
         </div>
       </div>
     </div>
