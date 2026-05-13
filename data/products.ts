@@ -1,8 +1,5 @@
 import type { Product, ProductCategory } from "@/types";
-
-/** Stable imagery via Picsum seeds (deterministic; avoids removed Unsplash photo 404s). */
-const pic = (seed: string) =>
-  `https://picsum.photos/seed/${encodeURIComponent(seed)}/1200/900`;
+import { coreProductImages, getExtensionImages } from "@/data/medical-images";
 
 const coreProducts: Product[] = [
   {
@@ -15,7 +12,7 @@ const coreProducts: Product[] = [
       "Our 12-channel digital ECG system delivers crisp waveforms, built-in arrhythmia detection, and optional Wi-Fi export for hospital information systems. Ideal for cardiology clinics, general practice, and mobile screening programs.",
     price: 4899,
     category: "Diagnostic",
-    images: [pic("cun-ecg-a"), pic("cun-ecg-b"), pic("cun-ecg-c")],
+    images: [...coreProductImages["ecg-machine-12-channel"]],
     specifications: {
       Channels: "12-lead simultaneous acquisition",
       Display: "10.1\" color touchscreen",
@@ -36,7 +33,7 @@ const coreProducts: Product[] = [
       "Compact cart-based ultrasound with phased array and convex probes, harmonic imaging, and Doppler modes. Designed for busy departments that need dependable imaging without a full fixed-room installation.",
     price: 42500,
     category: "Imaging",
-    images: [pic("cun-us-a"), pic("cun-us-b"), pic("cun-us-c")],
+    images: [...coreProductImages["portable-ultrasound-scanner"]],
     specifications: {
       Probes: "Convex + linear (optional cardiac)",
       Modes: "B, M, Color/PW/CW Doppler",
@@ -56,7 +53,7 @@ const coreProducts: Product[] = [
       "A dependable multiparameter monitor for wards, recovery, and intermediate care. Large numerics, configurable alarms, and optional EtCO₂ module for expanded capability.",
     price: 3450,
     category: "Patient Monitoring",
-    images: [pic("cun-pm-a"), pic("cun-pm-b"), pic("cun-pm-c")],
+    images: [...coreProductImages["multiparameter-patient-monitor"]],
     specifications: {
       Parameters: "ECG, SpO₂, NIBP, RESP, TEMP",
       Display: "15\" anti-glare touchscreen",
@@ -76,7 +73,7 @@ const coreProducts: Product[] = [
       "Public-access and clinical-ready biphasic defibrillator with impedance compensation, CPR metronome, and event recording. Rugged housing suitable for ambulances, airports, and hospital corridors.",
     price: 1799,
     category: "Emergency",
-    images: [pic("cun-defib-a"), pic("cun-defib-b"), pic("cun-defib-c")],
+    images: [...coreProductImages["aed-biphasic-defibrillator"]],
     specifications: {
       Waveform: "Biphasic truncated exponential",
       Energy: "150–360 J (adult), pediatric attenuation",
@@ -96,7 +93,7 @@ const coreProducts: Product[] = [
       "Complete digital radiography room package including generator, tube stand, table, and wireless FPD. Optimized dose protocols and PACS-ready DICOM workflow for modern imaging departments.",
     price: 185000,
     category: "Imaging",
-    images: [pic("cun-xray-a"), pic("cun-xray-b"), pic("cun-xray-c")],
+    images: [...coreProductImages["digital-x-ray-system"]],
     specifications: {
       Generator: "80 kW high-frequency",
       Detector: "17×17\" CsI wireless FPD",
@@ -116,7 +113,7 @@ const coreProducts: Product[] = [
       "Robust 10 L/min oxygen concentrator with purity alarm, low-noise compressor, and easy filter access. Suitable for extended operation in clinics, nursing facilities, and home oxygen programs.",
     price: 1249,
     category: "Respiratory",
-    images: [pic("cun-o2-a"), pic("cun-o2-b"), pic("cun-o2-c")],
+    images: [...coreProductImages["oxygen-concentrator-10l"]],
     specifications: {
       Flow: "1–10 L/min continuous",
       Purity: "93% ±3% at 5 L/min",
@@ -434,11 +431,7 @@ function buildExtensionProducts(): Product[] {
       description: t.long,
       price: t.price,
       category: t.category,
-      images: [
-        pic(`cun-ext-${seq}-a`),
-        pic(`cun-ext-${seq}-b`),
-        pic(`cun-ext-${seq}-c`),
-      ],
+      images: [...getExtensionImages(t.slugBase)],
       specifications: { ...t.specs, "Warranty": "12 months parts (typical)" },
       featured: t.featured ?? false,
     };

@@ -8,7 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 
 const heroImage =
-  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=2000&q=80";
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=2000&q=80";
 
 const btnBase =
   "inline-flex items-center justify-center gap-2 rounded-xl font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 active:scale-[0.98] px-7 py-3 text-base";

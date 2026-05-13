@@ -21,7 +21,7 @@ export default function AboutPage() {
     <>
       <section className="relative overflow-hidden bg-medical-900 py-16 text-white lg:py-24">
         <Image
-          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=2000&q=80"
+          src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=2000&q=80"
           alt=""
           fill
           className="object-cover opacity-30"
@@ -65,7 +65,7 @@ export default function AboutPage() {
           </div>
           <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-medical-100 shadow-card">
             <Image
-              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
+              src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80"
               alt="Clinical team reviewing equipment"
               fill
               className="object-cover"

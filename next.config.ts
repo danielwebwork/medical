@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Unsplash often blocks or times out when the Next.js server fetches via /_next/image.
+    // Serve remote URLs directly from the browser (still uses next/image layout & lazy loading).
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -11,16 +14,6 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "plus.unsplash.com",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-        pathname: "/**",
-      },
-      {
-        protocol: "https",
-        hostname: "fastly.picsum.photos",
         pathname: "/**",
       },
     ],

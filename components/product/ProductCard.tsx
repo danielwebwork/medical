@@ -1,20 +1,36 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight, FiImage } from "react-icons/fi";
 import type { Product } from "@/types";
 import { formatCurrency } from "@/lib/utils";
+import { useValidatedImages } from "@/hooks/useValidatedImages";
+import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
 
 export function ProductCard({ product }: { product: Product }) {
+  const { validUrls, ready } = useValidatedImages(product.images);
+  const cover = validUrls[0];
+
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:border-medical-200 hover:shadow-lg">
       <Link href={`/products/${product.slug}`} className="relative block aspect-[4/3] overflow-hidden bg-slate-100">
-        <Image
-          src={product.images[0]}
-          alt={product.name}
-          fill
-          className="object-cover transition duration-500 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-        />
+        {!ready ? (
+          <LoadingSkeleton className="absolute inset-0 h-full w-full rounded-none" />
+        ) : cover ? (
+          <Image
+            src={cover}
+            alt={product.name}
+            fill
+            className="object-cover transition duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-200 text-slate-400">
+            <FiImage className="h-14 w-14" aria-hidden />
+            <span className="mt-2 text-xs font-medium">Image unavailable</span>
+          </div>
+        )}
         <span className="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-medical-800 shadow-sm backdrop-blur">
           {product.category}
         </span>
