@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { FiClock, FiMapPin, FiPhone } from "react-icons/fi";
+import { FiClock, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/lib/site";
 
@@ -32,6 +32,16 @@ export function ContactPageContent() {
         className="rounded-2xl border border-slate-100 bg-white p-6 shadow-card sm:p-8"
       >
         <h2 className="text-lg font-semibold text-slate-900">Send a message</h2>
+        <p className="mt-2 text-sm text-slate-600">
+          Or email us directly at{" "}
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="font-medium text-medical-700 underline-offset-2 hover:underline"
+          >
+            {siteConfig.email}
+          </a>
+          .
+        </p>
         <div className="mt-6 space-y-4">
           <label className="block">
             <span className="mb-1 block text-sm font-medium text-slate-700">Name</span>
@@ -73,6 +83,19 @@ export function ContactPageContent() {
           <h2 className="text-lg font-semibold text-slate-900">Our offices</h2>
 
           <div className="mt-6 space-y-6">
+            <div className="rounded-xl border border-medical-100 bg-medical-50/60 p-4">
+              <h3 className="text-sm font-bold uppercase tracking-wide text-medical-700">
+                Company email
+              </h3>
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="mt-2 inline-flex items-center gap-2 text-sm font-medium text-medical-800 hover:text-medical-950"
+              >
+                <FiMail className="h-5 w-5 shrink-0 text-medical-600" aria-hidden />
+                {siteConfig.email}
+              </a>
+            </div>
+
             <div>
               <h3 className="text-sm font-bold uppercase tracking-wide text-medical-700">
                 {siteConfig.offices.china.label}

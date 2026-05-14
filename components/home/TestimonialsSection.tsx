@@ -2,30 +2,29 @@ import Image from "next/image";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Container } from "@/components/ui/Container";
 
+import { stockWholesale } from "@/lib/stock-media";
+
 const testimonials = [
   {
     quote:
-      "C U N Medical delivered our patient monitor fleet on schedule and supervised bedside training for nursing staff.",
-    name: "Chief Nursing Officer",
-    org: "Regional hospital, North America",
-    image:
-      "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&q=80",
+      "Sterile syringe lots arrived with full batch documentation and consistent E-beam sterilisation records—exactly what our immunisation programme requires.",
+    name: "Programme Director",
+    org: "Regional public health authority, Europe",
+    image: stockWholesale.thumbA,
   },
   {
     quote:
-      "Their imaging team coordinated generator specs and room shielding checks before our DR go-live. Professional end-to-end.",
-    name: "Head of Radiology",
-    org: "Imaging center, United States",
-    image:
-      "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&q=80",
+      "Their auto-disable syringes and face masks met our tender specs for traceability and CMA-backed quality; communication from production to shipment was clear.",
+    name: "Head of Procurement",
+    org: "University hospital network, China",
+    image: stockWholesale.thumbB,
   },
   {
     quote:
-      "Their team handled export paperwork and kept us informed on production and sea freight milestones from start to handover.",
-    name: "Procurement Manager",
-    org: "University health system",
-    image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80",
+      "We value the 30% plastic reduction initiative on compatible lines—without compromising sterility or packaging integrity for our warehouse chain.",
+    name: "Supply Chain Lead",
+    org: "Healthcare distributor, EU",
+    image: stockWholesale.thumbC,
   },
 ];
 
@@ -35,8 +34,8 @@ export function TestimonialsSection() {
       <Container>
         <SectionTitle
           eyebrow="Testimonials"
-          title="Teams that trust our delivery"
-          subtitle="Representative feedback from healthcare leaders we support worldwide."
+          title="Partners who rely on our production"
+          subtitle="Hospitals, programmes, and distributors across China and Europe."
           align="center"
           className="mx-auto [&_h2]:text-white [&_p]:text-slate-300"
         />
@@ -51,7 +50,13 @@ export function TestimonialsSection() {
               </blockquote>
               <figcaption className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
                 <div className="relative h-11 w-11 overflow-hidden rounded-full border border-white/20">
-                  <Image src={t.image} alt="" fill className="object-cover" sizes="44px" />
+                  <Image
+                    src={t.image}
+                    alt="Wholesale supply and packaging"
+                    fill
+                    className="object-cover"
+                    sizes="44px"
+                  />
                 </div>
                 <div>
                   <p className="text-sm font-semibold">{t.name}</p>

@@ -11,10 +11,11 @@ export function CtaBanner() {
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-24 -left-16 h-56 w-56 rounded-full bg-medical-900/20 blur-3xl" />
           <h2 className="relative text-balance text-2xl font-bold text-white sm:text-3xl">
-            Ready to upgrade your clinical capabilities?
+            Need sterile syringes, masks, or volume supply?
           </h2>
           <p className="relative mx-auto mt-3 max-w-2xl text-medical-50">
-            Request a quotation, schedule a demo, or speak with our clinical applications team today.
+            Contact our team for programme pricing, export documentation, and lead times from our
+            ISO-certified manufacturing facility.
           </p>
           <div className="relative mt-8 flex flex-wrap justify-center gap-4">
             <Link
@@ -36,7 +37,7 @@ export function CtaBanner() {
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-medical-600",
               )}
             >
-              Talk to sales
+              Contact us
             </Link>
           </div>
         </div>

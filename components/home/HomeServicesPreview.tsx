@@ -11,21 +11,21 @@ import { ServiceCard } from "@/components/services/ServiceCard";
 
 const items = [
   {
-    title: "Medical equipment sales",
+    title: "Sterile consumable production",
     description:
-      "Curated catalog of diagnostic, imaging, monitoring, and therapy devices from audited manufacturers.",
+      "Immunisation and hypodermic syringes plus protective masks—manufactured with validated processes and batch release controls.",
     icon: <FiLayers className="h-6 w-6" />,
   },
   {
-    title: "Installation",
+    title: "Sterilisation & quality systems",
     description:
-      "Site surveys, electrical checks, room layout guidance, and commissioning with acceptance testing.",
+      "E-beam sterilisation and ISO 9001 / ISO 13485 frameworks so every shipment meets documented safety expectations.",
     icon: <FiActivity className="h-6 w-6" />,
   },
   {
-    title: "Maintenance",
+    title: "Sustainable, medical-grade materials",
     description:
-      "Preventive maintenance contracts, spare parts, and rapid technical response to minimize downtime.",
+      "Eco-efficient steps to reduce plastic use where compatible with sterility—without compromising clinical performance.",
     icon: <FiShield className="h-6 w-6" />,
   },
 ];
@@ -36,8 +36,8 @@ export function HomeServicesPreview() {
       <Container>
         <SectionTitle
           eyebrow="What we do"
-          title="End-to-end equipment support"
-          subtitle="We do not just ship boxes—we engineer uptime for your clinical teams."
+          title="Manufacturing that protects patients &amp; staff"
+          subtitle="Large-scale capacity in China with reliable export programmes to Europe and the wider region."
         />
         <div className="grid gap-6 md:grid-cols-3">
           {items.map((s) => (
@@ -46,7 +46,7 @@ export function HomeServicesPreview() {
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4 text-sm text-slate-600">
           <FiTruck className="h-5 w-5 text-medical-600" />
-          <span>International shipping available — see our full services page.</span>
+          <span>Export &amp; supply chain coordination — see our full services page.</span>
           <Link href="/services" className="font-semibold text-medical-700 hover:underline">
             Explore services
           </Link>

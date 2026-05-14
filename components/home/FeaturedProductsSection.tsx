@@ -12,8 +12,8 @@ export function FeaturedProductsSection() {
       <Container>
         <SectionTitle
           eyebrow="Catalog"
-          title="Featured equipment"
-          subtitle="Trusted systems chosen by hospitals, diagnostic centers, and specialist clinics."
+          title="Featured products"
+          subtitle="Browse our range—including consumables and complementary medical equipment. Contact us for programmes, tenders, and volume supply."
         />
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {featured.map((p) => (

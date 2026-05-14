@@ -5,11 +5,11 @@ import { ProductsExplorer } from "@/components/product/ProductsExplorer";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Shop ECG systems, ultrasound, patient monitors, defibrillators, digital X-ray, and oxygen concentrators from C U N Medical.",
+    "Browse medical consumables and equipment from C U N Medical Equipments Co., Ltd—syringes, masks, diagnostics, and more. Request a quotation.",
   openGraph: {
-    title: "Medical equipment catalog | C U N Medical",
+    title: "Product catalog | C U N Medical",
     description:
-      "Browse certified medical machines with filters, search, and detailed specifications.",
+      "Filters, search, and specifications. Contact us for volume supply and export programmes.",
   },
 };
 

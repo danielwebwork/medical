@@ -1,11 +1,28 @@
 export const siteConfig = {
-  legalName: "C U N Medical and Surgical Equipment Co., Limited",
+  legalName: "C U N Medical Equipments Co., Ltd",
   brandName: "C U N Medical",
+  foundedYear: "2018",
   description:
-    "Trusted supplier of medical machines, diagnostic systems, and surgical equipment for hospitals and clinics worldwide.",
+    "Leading provider of high-quality medical solutions across China and Europe. We specialize in essential healthcare products including auto-disable immunization syringes, sterile hypodermic syringes, and protective face masks—engineered to safeguard medical professionals and patients.",
+  /** Full company narrative (About page & SEO). */
+  companyStory: [
+    "Founded in 2018, C U N Medical Equipments Co., Ltd is a leading provider of high-quality medical solutions across China and Europe. We specialize in the production of essential healthcare products, including auto-disable immunization syringes, sterile hypodermic syringes, and protective face masks—engineered to safeguard medical professionals and patients from virus-related infections.",
+    "Our state-of-the-art manufacturing facility is one of the largest in China, with a production capacity of 1.8 billion syringes annually. We utilize cutting-edge E-beam sterilisation technology, medical-grade materials, and eco-efficient processes that reduce plastic usage by 30%, all while maintaining the highest standards of safety and performance.",
+    "C U N Medical Equipments Co., Ltd operates under strict compliance with global regulatory standards. We are certified under ISO 9001:2015 (Quality Management Systems) and ISO 13485:2016 (Medical Device Management Systems), and our products are also proudly endorsed by the Chinese Medical Association.",
+    "With local manufacturing capabilities, we ensure timely and reliable access to essential medical consumables for healthcare institutions and professionals across the region.",
+  ],
+  certifications: [
+    "ISO 9001:2015 — Quality Management Systems",
+    "ISO 13485:2016 — Medical Device Management Systems",
+    "Endorsed by the Chinese Medical Association",
+  ],
+  highlights: {
+    annualSyringeCapacity: "1.8 billion syringes",
+    plasticReduction: "30%",
+    sterilisation: "E-beam sterilisation",
+  },
   url: "https://cunmedical.example.com",
-  /** Set when you have a public inbox; contact form + phones are primary. */
-  email: null as string | null,
+  email: "contactus@cunmedsurgeq.com",
   offices: {
     china: {
       label: "China office",
@@ -28,5 +45,4 @@ export const siteConfig = {
   },
 } as const;
 
-/** Primary line for SEO / JSON-LD (USA office). */
 export const primaryPhone = siteConfig.offices.usa.phone;
