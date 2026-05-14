@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Toaster } from "@/components/ui/Toaster";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { siteConfig } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,29 +24,28 @@ export const viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cunmedical.example.com"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "C U N Medical | Medical & Surgical Equipment",
-    template: "%s | C U N Medical",
+    default: `${siteConfig.brandName} | Medical consumables & equipment`,
+    template: `%s | ${siteConfig.brandName}`,
   },
-  description:
-    "Browse certified medical machines, diagnostic imaging, patient monitors, and surgical equipment. Installation, logistics, and after-sales support from our China and USA offices.",
+  description: siteConfig.description,
   keywords: [
+    "medical consumables",
+    "hypodermic syringes",
+    "immunization syringes",
+    "face masks",
+    "ISO 13485",
     "medical equipment",
-    "surgical equipment",
-    "ECG machine",
-    "ultrasound",
-    "patient monitor",
-    "C U N Medical",
+    siteConfig.brandName,
     "medical equipment supplier",
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "C U N Medical and Surgical Equipment Co., Limited",
-    title: "C U N Medical | Medical & Surgical Equipment",
-    description:
-      "Premium medical equipment sales, installation, and maintenance for healthcare facilities.",
+    siteName: siteConfig.legalName,
+    title: `${siteConfig.brandName} | Medical consumables & equipment`,
+    description: siteConfig.description,
   },
   robots: { index: true, follow: true },
 };

@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductGallery } from "@/components/product/ProductGallery";
-import { AddToCartControls } from "@/components/product/AddToCartControls";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 import { getProductBySlug, getRelatedProducts } from "@/data/products";
-import { formatCurrency } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -64,11 +62,21 @@ export default async function ProductDetailPage({ params }: Props) {
           </h1>
           <p className="mt-4 text-lg text-slate-600">{product.shortDescription}</p>
           <p className="mt-4 text-slate-600">{product.description}</p>
-          <p className="mt-8 text-3xl font-bold text-medical-700">
-            {formatCurrency(product.price)}
-          </p>
-          <div className="mt-8">
-            <AddToCartControls productId={product.id} />
+          <div className="mt-8 rounded-2xl border border-medical-100 bg-medical-50/80 p-5">
+            <p className="text-sm font-semibold text-medical-900">Request a quotation</p>
+            <p className="mt-2 text-sm text-slate-600">
+              Volume programmes, tenders, and export documentation—our team will respond with
+              specifications and lead times tailored to your institution.
+            </p>
+            <Link
+              href="/contact"
+              className={cn(
+                "mt-4 inline-flex items-center justify-center rounded-xl bg-medical-600 px-6 py-3 text-sm font-semibold text-white shadow-soft",
+                "transition hover:bg-medical-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-medical-500 focus-visible:ring-offset-2",
+              )}
+            >
+              Contact us
+            </Link>
           </div>
           <div className="mt-10 rounded-2xl border border-slate-100 bg-slate-50/80 p-5">
             <h2 className="text-lg font-semibold text-slate-900">Specifications</h2>
@@ -89,7 +97,7 @@ export default async function ProductDetailPage({ params }: Props) {
       <section className="mt-20 border-t border-slate-100 pt-16">
         <h2 className="text-2xl font-bold text-slate-900">Related products</h2>
         <p className="mt-2 text-slate-600">
-          Customers interested in this device often evaluate these alternatives.
+          Customers interested in this product often evaluate these alternatives.
         </p>
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {related.map((p) => (

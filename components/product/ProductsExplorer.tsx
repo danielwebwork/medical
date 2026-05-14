@@ -47,7 +47,7 @@ function ProductsExplorerInner() {
         <SectionTitle
           eyebrow="Shop"
           title="Medical machines & equipment"
-          subtitle="Diagnostic, imaging, monitoring, and emergency care systems—spec-backed and ready for quotation."
+          subtitle="Consumables and complementary medical products—search, filter, then contact us for programmes and export."
           className="mb-0 lg:max-w-xl"
         />
         <div className="flex w-full flex-col gap-3 sm:flex-row lg:w-auto lg:min-w-[320px]">

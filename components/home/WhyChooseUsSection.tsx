@@ -1,26 +1,27 @@
-import { FiAward, FiGlobe, FiHeadphones, FiTrendingUp } from "react-icons/fi";
+import { FiAward, FiGlobe, FiShield, FiZap } from "react-icons/fi";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Container } from "@/components/ui/Container";
+import { siteConfig } from "@/lib/site";
 
 const reasons = [
   {
-    title: "Clinical-grade sourcing",
-    body: "We prioritize devices with traceable serials, factory warranties, and documentation suitable for regulatory files.",
+    title: "Manufacturing at scale",
+    body: `Our facility is among the largest in China, with capacity for ${siteConfig.highlights.annualSyringeCapacity}—supporting national immunisation and hospital supply programmes.`,
     icon: FiAward,
   },
   {
-    title: "Transparent pricing",
-    body: "Clear quotations, optional bundles, and no surprise fees for standard commissioning packages.",
-    icon: FiTrendingUp,
+    title: "Sterilisation & materials",
+    body: `We use ${siteConfig.highlights.sterilisation} and medical-grade materials, with processes designed to reduce plastic use by up to ${siteConfig.highlights.plasticReduction} where applicable.`,
+    icon: FiZap,
   },
   {
-    title: "Dedicated support",
-    body: "Engineers and account managers who understand OR, radiology, and ward workflows—not just sales scripts.",
-    icon: FiHeadphones,
+    title: "Global standards",
+    body: "ISO 9001:2015 and ISO 13485:2016 certified operations, with products endorsed by the Chinese Medical Association.",
+    icon: FiShield,
   },
   {
-    title: "Global reach",
-    body: "China and United States offices support export documentation, logistics planning, and responsive follow-up for international buyers.",
+    title: "China & Europe",
+    body: "Local manufacturing and disciplined logistics help healthcare institutions access essential consumables on time.",
     icon: FiGlobe,
   },
 ];
@@ -30,9 +31,9 @@ export function WhyChooseUsSection() {
     <section className="py-16 lg:py-24">
       <Container>
         <SectionTitle
-          eyebrow="Why C U N Medical"
-          title="Built for hospitals that cannot afford downtime"
-          subtitle="C U N Medical and Surgical Equipment Co., Limited partners with facilities that demand reliability, training, and accountable after-sales care."
+          eyebrow={`Why ${siteConfig.brandName}`}
+          title="Trusted production for infection prevention"
+          subtitle={`${siteConfig.legalName} focuses on syringes, masks, and related consumables—engineered for safety from design through sterilisation.`}
           align="center"
           className="mx-auto"
         />

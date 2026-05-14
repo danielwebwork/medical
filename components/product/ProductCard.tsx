@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FiArrowRight, FiImage } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 import type { Product } from "@/types";
-import { formatCurrency } from "@/lib/utils";
 import { useValidatedImages } from "@/hooks/useValidatedImages";
 import { LoadingSkeleton } from "@/components/ui/LoadingSkeleton";
+import { FiImage } from "react-icons/fi";
 
 export function ProductCard({ product }: { product: Product }) {
   const { validUrls, ready } = useValidatedImages(product.images);
@@ -44,13 +44,10 @@ export function ProductCard({ product }: { product: Product }) {
         <p className="mt-2 line-clamp-2 flex-1 text-sm text-slate-600">
           {product.shortDescription}
         </p>
-        <div className="mt-4 flex items-end justify-between gap-3 border-t border-slate-100 pt-4">
-          <p className="text-lg font-bold text-medical-700">
-            {formatCurrency(product.price)}
-          </p>
+        <div className="mt-4 border-t border-slate-100 pt-4">
           <Link
             href={`/products/${product.slug}`}
-            className="inline-flex items-center gap-1 rounded-xl bg-medical-600 px-4 py-2 text-sm font-semibold text-white shadow-soft transition hover:bg-medical-700"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-medical-600 px-4 py-2.5 text-sm font-semibold text-white shadow-soft transition hover:bg-medical-700"
           >
             View details
             <FiArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />

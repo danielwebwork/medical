@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FiMapPin, FiPhone } from "react-icons/fi";
+import { FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Container } from "@/components/ui/Container";
 import { siteConfig } from "@/lib/site";
@@ -9,7 +9,6 @@ const footerLinks = [
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-  { href: "/cart", label: "Cart" },
 ];
 
 export function Footer() {
@@ -23,12 +22,18 @@ export function Footer() {
             </span>
             <div>
               <p className="font-semibold text-slate-900">{siteConfig.brandName}</p>
-              <p className="text-xs text-medical-600">Medical &amp; Surgical</p>
+              <p className="text-xs text-medical-600">Medical consumables</p>
             </div>
           </div>
           <p className="text-sm leading-relaxed text-slate-600">
             {siteConfig.description}
           </p>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="mt-3 inline-flex text-sm font-medium text-medical-700 hover:text-medical-900"
+          >
+            {siteConfig.email}
+          </a>
         </div>
 
         <div>
@@ -53,6 +58,13 @@ export function Footer() {
           <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-900">
             Offices
           </h3>
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="mb-5 inline-flex items-center gap-2 text-sm font-medium text-medical-700 hover:text-medical-900"
+          >
+            <FiMail className="shrink-0" aria-hidden />
+            {siteConfig.email}
+          </a>
           <ul className="space-y-5 text-sm text-slate-600">
             <li>
               <p className="font-semibold text-slate-800">{siteConfig.offices.china.label}</p>

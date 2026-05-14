@@ -4,10 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiShoppingCart, FiX } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import { Container } from "@/components/ui/Container";
 import { siteConfig } from "@/lib/site";
-import { useCartStore } from "@/store/cartStore";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -21,14 +20,6 @@ const navLinks = [
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const count = useCartStore((s) =>
-    s.items.reduce((a, i) => a + i.quantity, 0),
-  );
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     setOpen(false);
@@ -46,7 +37,7 @@ export function Navbar() {
               {siteConfig.brandName}
             </span>
             <span className="text-[10px] font-medium uppercase tracking-wide text-medical-600">
-              Equipment
+              Equipments
             </span>
           </span>
         </Link>
@@ -82,19 +73,6 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/cart"
-            className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-medical-100 bg-white text-medical-800 shadow-sm transition hover:border-medical-300 hover:bg-medical-50"
-            aria-label="Shopping cart"
-          >
-            <FiShoppingCart className="h-5 w-5" />
-            {mounted && count > 0 ? (
-              <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-medical-600 px-1 text-[10px] font-bold text-white">
-                {count > 99 ? "99+" : count}
-              </span>
-            ) : null}
-          </Link>
-
           <button
             type="button"
             className="flex h-10 w-10 items-center justify-center rounded-xl border border-medical-100 bg-white text-slate-800 md:hidden"

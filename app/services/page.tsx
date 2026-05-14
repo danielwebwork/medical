@@ -13,38 +13,38 @@ import { siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Services",
-  description: `${siteConfig.brandName} provides equipment sales, installation, maintenance, consultation, and international logistics.`,
+  description: `${siteConfig.brandName} — high-volume syringe & mask manufacturing, E-beam sterilisation, regulatory compliance, and supply to China and Europe.`,
 };
 
 const services = [
   {
-    title: "Medical equipment sales",
+    title: "Medical consumable manufacturing",
     description:
-      "Needs assessment, comparative quotations, demonstration units, and warranty registration for capital modalities.",
+      "Auto-disable immunisation syringes, sterile hypodermic syringes, and protective face masks—produced with validated processes and batch traceability.",
     icon: <FiLayers className="h-6 w-6" />,
   },
   {
-    title: "Installation",
+    title: "E-beam sterilisation",
     description:
-      "Mechanical anchoring, electrical validation, network integration, radiation safety checks (where applicable), and user acceptance protocols.",
+      "Cutting-edge electron-beam sterilisation integrated into production flow for consistent microbiological safety.",
     icon: <FiCpu className="h-6 w-6" />,
   },
   {
-    title: "Maintenance",
+    title: "Quality & regulatory support",
     description:
-      "Preventive maintenance schedules, probe and battery replacements, firmware updates, and loaner strategies for critical devices.",
+      "Operations aligned with ISO 9001:2015 and ISO 13485:2016, plus documentation support for tenders and hospital onboarding.",
     icon: <FiActivity className="h-6 w-6" />,
   },
   {
-    title: "Consultation",
+    title: "Programme & tender consultation",
     description:
-      "Department layout planning, modality mix advisory, financing structure guidance, and training pathway design.",
+      "Guidance on volume planning, specification alignment, and sustainable packaging options—including plastic-reduction initiatives.",
     icon: <FiHeadphones className="h-6 w-6" />,
   },
   {
-    title: "International logistics",
+    title: "Export & logistics",
     description:
-      "Sea and air freight coordination, export documentation, insured handling, and last-mile biomedical handover where supported.",
+      "Coordinated supply from our China facility to healthcare institutions and distributors across Europe and the wider region.",
     icon: <FiTruck className="h-6 w-6" />,
   },
 ];
@@ -54,8 +54,8 @@ export default function ServicesPage() {
     <Container className="py-14 lg:py-20">
       <SectionTitle
         eyebrow="Services"
-        title="Lifecycle support for every modality"
-        subtitle="Whether you are commissioning a new radiology suite or refreshing ward monitors, our service lines plug into your governance model."
+        title="From sterile production to your supply chain"
+        subtitle={`${siteConfig.legalName} combines large-scale manufacturing with the certifications and endorsements healthcare buyers expect.`}
         align="center"
         className="mx-auto"
       />
