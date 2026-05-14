@@ -12,6 +12,9 @@ const LOCAL_FACILITY = [
   "/site/facility-beds-and-cartons.png",
 ] as const;
 
+/** Your `public/site/` uploads — use for featured placement on the home page, etc. */
+export const LOCAL_FACILITY_IMAGES: readonly string[] = LOCAL_FACILITY;
+
 /** Unsplash `photo-*` ids — wholesale / logistics / packaging (not your facility). */
 const SUPPLEMENT_PHOTO_IDS = [
   "1586528116311-ad8dd3c8310d",

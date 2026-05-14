@@ -3,6 +3,7 @@ import { ProductCard } from "@/components/product/ProductCard";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { Container } from "@/components/ui/Container";
 import { getFeaturedProducts } from "@/data/products";
+import { LOCAL_FACILITY_IMAGES } from "@/lib/stock-media";
 import { cn } from "@/lib/utils";
 
 export function FeaturedProductsSection() {
@@ -16,9 +17,12 @@ export function FeaturedProductsSection() {
           subtitle="Browse our range—including consumables and complementary medical equipment. Contact us for programmes, tenders, and volume supply."
         />
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-          {featured.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
+          {featured.map((p, index) => {
+            const coverSrc =
+              LOCAL_FACILITY_IMAGES[index % LOCAL_FACILITY_IMAGES.length];
+            const images = [coverSrc, ...p.images.filter((u) => u !== coverSrc)];
+            return <ProductCard key={p.id} product={{ ...p, images }} />;
+          })}
         </div>
         <div className="mt-10 flex justify-center">
           <Link
